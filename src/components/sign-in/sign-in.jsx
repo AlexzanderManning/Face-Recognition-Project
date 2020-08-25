@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 
 class SignIn extends Component {
-constructor(props) {
-  super(props);
-  this.state = {
-    signInEmail:'',
-    signInPassword:''
+  constructor(props) {
+    super(props);
+    this.state = {
+      signInEmail: "",
+      signInPassword: "",
+    };
   }
-}
-  
+
   onEmailChange = (event) => {
     this.setState({ signInEmail: event.target.value });
   };
@@ -17,25 +17,33 @@ constructor(props) {
     this.setState({ signInPassword: event.target.value });
   };
 
-  onSubmitSignIn = () => {
+  onSubmitSignIn = async () => {
     //Making a post request via fetch
     //Then doing doing something with it
-    fetch("http://localhost:3000/signin", {
-      method: "post",
-      headers: { "Content-type": "application/json" },
-      body: JSON.stringify({
-        email: this.state.signInEmail,
-        password: this.state.signInPassword,
-      }),
-    })
-      .then((response) => response.json())
-      .then((user) => {
-        if (user.id) {
-          this.props.loadUser(user);
-          this.props.onRouteChange("home");
-        }
+    try {
+      const response = await fetch("http://localhost:3000/signin", {
+        method: "post",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify({
+          email: this.state.signInEmail,
+          password: this.state.signInPassword,
+        }),
       });
-  }
+
+      const user = await response.json();
+
+      if (user.id) {
+        this.props.loadUser(user);
+        this.props.onRouteChange("home");
+      } else {
+        await Promise.reject(
+          new Error("Error during sign in. Check credentials and try again.")
+        );
+      }
+    } catch (err) {
+      alert(err);
+    }
+  };
 
   render() {
     const { onRouteChange } = this.props;

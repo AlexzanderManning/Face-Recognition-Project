@@ -22,25 +22,31 @@ class Register extends React.Component {
     this.setState({ name: event.target.value });
   };
 
-  onSubmitSignIn = () => {
+  onSubmitSignIn = async () => {
     //Making a post request via fetch
     //Then doing doing something with it
-    fetch("http://localhost:3000/register", {
-      method: "post",
-      headers: { "Content-type": "application/json" },
-      body: JSON.stringify({
-        email: this.state.email,
-        password: this.state.password,
-        name: this.state.name
-      }),
-    })
-      .then((response) => response.json())
-      .then((user) => {
-       
-          console.log(user);
-          this.props.loadUser(user);
-          this.props.onRouteChange("home");
+    try {
+      const response = await fetch("http://localhost:3000/register", {
+        method: "post",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify({
+          email: this.state.email,
+          password: this.state.password,
+          name: this.state.name,
+        }),
       });
+
+      const user = await response.json();
+
+      if (user.id) {
+        this.props.loadUser(user);
+        this.props.onRouteChange("home");
+      }else{
+        await Promise.reject(new Error("Can't complete registration. Please try again."))
+      }
+    } catch (err) {
+      alert(err);
+    }
   };
 
   render() {
