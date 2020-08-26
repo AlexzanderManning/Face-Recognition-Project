@@ -20,6 +20,7 @@ class SignIn extends Component {
   onSubmitSignIn = async () => {
     //Making a post request via fetch
     //Then doing doing something with it
+    //Making a request in the body.
     try {
       const response = await fetch("http://localhost:3000/signin", {
         method: "post",

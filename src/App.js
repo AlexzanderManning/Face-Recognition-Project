@@ -1,6 +1,3 @@
-//See if you can do something with the 
-// Remove Node modules from github.
-
 import React, { Component } from 'react';
 import './App.css';
 
@@ -89,6 +86,9 @@ class App extends Component {
     this.setState({input: event.target.value})
   }
 
+  //Example of making an api call to backend in the request.body
+  //This state.input does not expose any data.
+  //Lesson = make api calls on the backend.
   onSubmit = () => {
     this.setState({ imageURL: this.state.input });
     fetch("http://localhost:3000/imageurl", {
