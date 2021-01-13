@@ -22,7 +22,7 @@ class SignIn extends Component {
     //Then doing doing something with it
     //Making a request in the body.
     try {
-      const response = await fetch("http://localhost:3000/signin", {
+      const response = await fetch("https://afternoon-plateau-57665.herokuapp.com/signin", {
         method: "post",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify({
@@ -49,7 +49,7 @@ class SignIn extends Component {
   render() {
     const { onRouteChange } = this.props;
     return (
-      <article className="br3 ba dark-gray b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center white">
+      <article className="br3 ba b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
         <main className="pa4 black-80">
           <div className="measure">
             <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
@@ -59,7 +59,7 @@ class SignIn extends Component {
                   Email
                 </label>
                 <input
-                  className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
+                  className="b pa2 input-reset ba bg-white w-100"
                   type="email"
                   name="email-address"
                   id="email-address"
@@ -71,7 +71,7 @@ class SignIn extends Component {
                   Password
                 </label>
                 <input
-                  className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
+                  className="b pa2 input-reset ba bg-white w-100"
                   type="password"
                   name="password"
                   id="password"
@@ -81,7 +81,7 @@ class SignIn extends Component {
             </fieldset>
             <div className="">
               <input
-                className="f1 b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
+                className="b ph3 pv2 input-reset ba b--black bg-transparent  pointer f6 dib pointer"
                 type="submit"
                 value="Sign in"
                 onClick={this.onSubmitSignIn}

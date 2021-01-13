@@ -26,15 +26,18 @@ class Register extends React.Component {
     //Making a post request via fetch
     //Then doing doing something with it
     try {
-      const response = await fetch("http://localhost:3000/register", {
-        method: "post",
-        headers: { "Content-type": "application/json" },
-        body: JSON.stringify({
-          email: this.state.email,
-          password: this.state.password,
-          name: this.state.name,
-        }),
-      });
+      const response = await fetch(
+        "https://afternoon-plateau-57665.herokuapp.com/register",
+        {
+          method: "post",
+          headers: { "Content-type": "application/json" },
+          body: JSON.stringify({
+            email: this.state.email,
+            password: this.state.password,
+            name: this.state.name,
+          }),
+        }
+      );
 
       const user = await response.json();
 
@@ -61,7 +64,7 @@ class Register extends React.Component {
                   Name
                 </label>
                 <input
-                  className="pa2 input-reset ba bg-white hover-white w-100"
+                  className="b pa2 input-reset ba bg-white w-100"
                   type="text"
                   name="name"
                   id="name"
@@ -73,7 +76,7 @@ class Register extends React.Component {
                   Email
                 </label>
                 <input
-                  className="pa2 input-reset ba bg-white hover-white w-100"
+                  className="b pa2 input-reset ba bg-white w-100"
                   type="email"
                   name="email-address"
                   id="email-address"
@@ -85,7 +88,7 @@ class Register extends React.Component {
                   Password
                 </label>
                 <input
-                  className="b pa2 input-reset ba bg-white hover-white w-100"
+                  className="b pa2 input-reset ba bg-white w-100"
                   type="password"
                   name="password"
                   id="password"
